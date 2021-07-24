@@ -20,11 +20,10 @@ public class MessageBrokerProducerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        LOG.info("Starting CommandLineRunner");
-        System.out.print("Message Broker Producer Application is now running.");
+        LOG.info("Starting Command Line Runner");
         final Scanner scanner = new Scanner(System.in);
-        while (true) {
+        /*while (true) {
             Thread.sleep(1000);
-        }
+        }*/
     }
 }

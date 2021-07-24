@@ -12,6 +12,7 @@
     <artifactId>message-broker-core</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>message-broker-core</name>
+    <packaging>jar</packaging>
     <!-- TODO <description>Demo project for Spring Boot</description> -->
 
     <build>

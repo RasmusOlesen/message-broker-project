@@ -4,3 +4,12 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672" # default login guest:guest
+  producer:
+    image: "message-broker-producer:0.0.1-SNAPSHOT"
+    depends_on:
+      - "rabbitmq"
+  consumer:
+    image: "message-broker-consumer:0.0.1-SNAPSHOT"
+    depends_on:
+      - "rabbitmq"
+

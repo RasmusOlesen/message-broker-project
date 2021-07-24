@@ -12,6 +12,7 @@
     <artifactId>message-broker-producer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>message-broker-producer</name>
+    <packaging>jar</packaging>
     <!-- TODO <description>Demo project for Spring Boot</description> -->
 
     <dependencies>
@@ -36,8 +37,14 @@
                         </exclude>
                     </excludes>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-image</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>
