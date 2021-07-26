@@ -25,11 +25,10 @@ $ sudo apt-get install build-essential python3 python3-pip git maven
 * https://hub.docker.com/_/postgres/
 ## Spring Boot
 * https://spring.io/guides/gs/spring-boot-docker/
+* https://projects.spring.io/spring-shell/
+
+  https://docs.spring.io/spring-shell/docs/2.0.1.RELEASE/reference/htmlsingle/
 ## RabbitMQ
 ## PostgreSQL
 ## TODO
-* Spring Shell : https://projects.spring.io/spring-shell/
-  
-  https://docs.spring.io/spring-shell/docs/2.0.1.RELEASE/reference/htmlsingle/
-* https://www.jetbrains.com/help/idea/docker.html#run-containers
 * Overview and Documentation
