@@ -24,11 +24,13 @@ $ sudo apt-get install build-essential python3 python3-pip git maven
 * https://hub.docker.com/_/rabbitmq/
 * https://hub.docker.com/_/postgres/
 ## Spring Boot
-* https://spring.io/guides/gs/spring-boot-docker/
-* https://projects.spring.io/spring-shell/
-
-  https://docs.spring.io/spring-shell/docs/2.0.1.RELEASE/reference/htmlsingle/
-## RabbitMQ
-## PostgreSQL
+### Docker
+https://spring.io/guides/gs/spring-boot-docker/
+### Shell
+https://projects.spring.io/spring-shell/  
+https://docs.spring.io/spring-shell/docs/2.0.1.RELEASE/reference/htmlsingle/
+### RabbitMQ
+https://spring.io/guides/gs/messaging-rabbitmq/
+### PostgreSQL
 ## TODO
 * Overview and Documentation

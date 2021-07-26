@@ -5,7 +5,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.shell.jline.InteractiveShellApplicationRunner;
 import org.springframework.shell.jline.ScriptShellApplicationRunner;
 
-@Deprecated //TODO REMOVE CLASS
 // Prevent shell from blocking test execution
 // https://github.com/spring-projects/spring-shell/issues/204
 @SpringBootTest(properties = {

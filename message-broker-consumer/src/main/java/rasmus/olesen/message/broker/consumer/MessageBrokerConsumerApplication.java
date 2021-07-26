@@ -1,17 +1,27 @@
 package rasmus.olesen.message.broker.consumer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import lombok.extern.java.Log;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.context.annotation.Bean;
+import rasmus.olesen.message.broker.core.MessageBrokerCoreApplication;
 
-@SpringBootApplication
-public class MessageBrokerConsumerApplication {
-    private static final Logger LOG = LoggerFactory.getLogger(MessageBrokerConsumerApplication.class);
+@Log
+public class MessageBrokerConsumerApplication extends MessageBrokerCoreApplication {
 
-    public static void main(String[] args) {
-        LOG.info("Starting Application");
-        SpringApplication.run(MessageBrokerConsumerApplication.class, args);
-        LOG.info("Stopping Application");
+    @Bean
+    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
+                                             MessageListenerAdapter listenerAdapter) {
+        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+        container.setQueueNames(getQueueName());
+        container.setMessageListener(listenerAdapter);
+        return container;
+    }
+
+    @Bean
+    MessageListenerAdapter listenerAdapter(MessageReceiver messageReceiver) {
+        return new MessageListenerAdapter(messageReceiver, "receiveMessage");
     }
 }
