@@ -1,6 +1,5 @@
-package rasmus.olesen.message.broker.core;
+package rasmus.olesen.message.broker.core.rabbit;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.amqp.core.Binding;
@@ -8,27 +7,23 @@ import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 @Log
 @RequiredArgsConstructor
-@Configuration
-public class RabbitConfiguration {
+@Component
+public class RabbitWiring {
 
-    //TODO Config Properties
-    @Getter
-    private static String topicExchangeName = "spring-boot-exchange";
-    @Getter
-    private static String queueName = "spring-boot";
+    private final RabbitConfiguration rabbitConfiguration;
 
     @Bean
     protected Queue queue() {
-        return new Queue(queueName, false);
+        return new Queue(rabbitConfiguration.getQueueName(), false);
     }
 
     @Bean
     protected TopicExchange exchange() {
-        return new TopicExchange(topicExchangeName);
+        return new TopicExchange(rabbitConfiguration.getTopicExchangeName());
     }
 
     @Bean

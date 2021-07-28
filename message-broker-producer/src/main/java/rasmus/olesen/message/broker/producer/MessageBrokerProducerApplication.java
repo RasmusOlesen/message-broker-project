@@ -2,20 +2,19 @@ package rasmus.olesen.message.broker.producer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-import rasmus.olesen.message.broker.core.RabbitConfiguration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import rasmus.olesen.message.broker.core.MessageSender;
 
-@ShellComponent
 @Log
 @RequiredArgsConstructor
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "rasmus.olesen.message.broker")
+@EnableScheduling
 public class MessageBrokerProducerApplication {
 
-    private final RabbitTemplate rabbitTemplate;
+    private final MessageSender messageSender;
 
     public static void main(String[] args) {
         log.info("Starting Application");
@@ -24,10 +23,10 @@ public class MessageBrokerProducerApplication {
     }
 
 
-    @ShellMethod("Sends a message to RabbitMQ") //TODO Debug parameters
-    private void sendMessage() {
-        rabbitTemplate.convertAndSend(RabbitConfiguration.getTopicExchangeName(), "foo.bar.baz", "Hello from RabbitMQ!");
+    @Scheduled(fixedDelay = 5000)
+    private void workerTask() {
+        log.finest("Running worker task");
+        messageSender.sendMessage();
     }
-
 
 }

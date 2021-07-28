@@ -31,6 +31,10 @@ https://projects.spring.io/spring-shell/
 https://docs.spring.io/spring-shell/docs/2.0.1.RELEASE/reference/htmlsingle/
 ### RabbitMQ
 https://spring.io/guides/gs/messaging-rabbitmq/
+### Scheduling Tasks
+https://spring.io/guides/gs/scheduling-tasks/
 ### PostgreSQL
 ## TODO
 * Overview and Documentation
+* Commit IDEA run targets
+* Test coverage and refactor

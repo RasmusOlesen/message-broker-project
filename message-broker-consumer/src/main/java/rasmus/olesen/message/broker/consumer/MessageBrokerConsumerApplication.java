@@ -9,14 +9,15 @@ import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import rasmus.olesen.message.broker.core.RabbitConfiguration;
+import rasmus.olesen.message.broker.core.rabbit.RabbitConfiguration;
 
 @Log
 @RequiredArgsConstructor
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "rasmus.olesen.message.broker")
 public class MessageBrokerConsumerApplication {
 
     private final RabbitTemplate rabbitTemplate;
+    private final RabbitConfiguration rabbitConfiguration;
 
     public static void main(String[] args) {
         log.info("Starting Application");
@@ -27,15 +28,17 @@ public class MessageBrokerConsumerApplication {
     @Bean
     SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
                                              MessageListenerAdapter listenerAdapter) {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+        final SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
-        container.setQueueNames(RabbitConfiguration.getQueueName());
+        container.setQueueNames(rabbitConfiguration.getQueueName());
         container.setMessageListener(listenerAdapter);
         return container;
     }
 
     @Bean
     MessageListenerAdapter listenerAdapter(MessageReceiver messageReceiver) {
-        return new MessageListenerAdapter(messageReceiver, "receiveMessage");
+        final MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter(messageReceiver, "receiveMessage");
+        messageListenerAdapter.setMessageConverter(null); // Ensure that MessageReceiver gets the "raw" Message object.
+        return messageListenerAdapter;
     }
 }
