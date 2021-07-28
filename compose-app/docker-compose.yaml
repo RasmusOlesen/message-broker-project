@@ -3,7 +3,7 @@ services:
     image: "rabbitmq:management"
     ports:
       - "5672:5672"
-      - "15672:15672" # default login guest:guest
+      - "15672:15672" # http://localhost:15672 default login guest:guest
   producer:
     image: "message-broker-producer:0.0.1-SNAPSHOT"
     depends_on:
