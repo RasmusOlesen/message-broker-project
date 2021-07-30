@@ -36,7 +36,9 @@ public class MessageSender {
         if (messageProperties.getTimestamp() == null) {
             messageProperties.setTimestamp(new Date());
         }
-        messageProperties.setMessageId(Integer.toString(counter.getAndIncrement()));
+        if(messageProperties.getMessageId() == null) {
+            messageProperties.setMessageId(Integer.toString(counter.getAndIncrement()));
+        }
         rabbitTemplate.send(rabbitConfiguration.getTopicExchangeName(), rabbitConfiguration.getRoutingKey() + ".message", message);
     }
 
