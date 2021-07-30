@@ -2,6 +2,7 @@ package rasmus.olesen.message.broker.consumer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
@@ -28,6 +29,7 @@ public class MessageBrokerConsumerApplication {
     @Bean
     SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
                                              MessageListenerAdapter listenerAdapter) {
+
         final SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
         container.setQueueNames(rabbitConfiguration.getQueueName());
@@ -37,7 +39,7 @@ public class MessageBrokerConsumerApplication {
 
     @Bean
     MessageListenerAdapter listenerAdapter(MessageReceiver messageReceiver) {
-        final MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter(messageReceiver, "receiveMessage");
+        final MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter(messageReceiver);
         messageListenerAdapter.setMessageConverter(null); // Ensure that MessageReceiver gets the "raw" Message object.
         return messageListenerAdapter;
     }

@@ -8,9 +8,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfiguration {
 
-    @Value("message.broker.topic.exchange.name")
+    @Value("${message.broker.topic.exchange.name}")
     private String topicExchangeName;
-    @Value("message.broker.queue.name")
+    @Value("${message.broker.queue.name}")
     private String queueName;
+    @Value("${message.broker.routing.key}")
+    private String routingKey;
 
 }

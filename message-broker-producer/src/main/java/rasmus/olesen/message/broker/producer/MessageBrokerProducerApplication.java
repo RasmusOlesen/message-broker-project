@@ -23,7 +23,7 @@ public class MessageBrokerProducerApplication {
     }
 
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedRate = 13000)
     private void workerTask() {
         log.finest("Running worker task");
         messageSender.sendMessage();

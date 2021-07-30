@@ -22,7 +22,7 @@ $ sudo apt-get install build-essential python3 python3-pip git maven
 ## Docker Images
 * https://hub.docker.com/_/openjdk/
 * https://hub.docker.com/_/rabbitmq/
-* https://hub.docker.com/_/postgres/
+* https://hub.docker.com/_/mysql
 ## Spring Boot
 ### Docker
 https://spring.io/guides/gs/spring-boot-docker/
@@ -33,7 +33,11 @@ https://docs.spring.io/spring-shell/docs/2.0.1.RELEASE/reference/htmlsingle/
 https://spring.io/guides/gs/messaging-rabbitmq/
 ### Scheduling Tasks
 https://spring.io/guides/gs/scheduling-tasks/
-### PostgreSQL
+### MySQL
+https://spring.io/guides/gs/accessing-data-jpa/  
+https://spring.io/guides/gs/accessing-data-mysql/
+https://docs.spring.io/spring-boot/docs/2.5.3/reference/html/features.html#features.sql  
+https://docs.spring.io/spring-boot/docs/2.5.3/reference/html/features.html#features.nosql  
 ## TODO
 * Overview and Documentation
 * Commit IDEA run targets

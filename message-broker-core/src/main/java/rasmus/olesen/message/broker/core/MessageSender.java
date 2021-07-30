@@ -11,18 +11,20 @@ import rasmus.olesen.message.broker.core.rabbit.RabbitConfiguration;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Log
 @RequiredArgsConstructor
 @Component
 public class MessageSender {
 
+    private final static AtomicInteger counter = new AtomicInteger(0);
     private final ApplicationConfiguration applicationConfiguration;
     private final RabbitTemplate rabbitTemplate;
     private final RabbitConfiguration rabbitConfiguration;
 
     public void sendMessage() {
-        sendMessage("Hello from: " + applicationConfiguration);
+        sendMessage("Hello from: " + applicationConfiguration.getApplicationName());
     }
 
     public void sendMessage(final String message) {
@@ -34,7 +36,8 @@ public class MessageSender {
         if (messageProperties.getTimestamp() == null) {
             messageProperties.setTimestamp(new Date());
         }
-        rabbitTemplate.send(rabbitConfiguration.getTopicExchangeName(), "foo.bar.baz", message);
+        messageProperties.setMessageId(Integer.toString(counter.getAndIncrement()));
+        rabbitTemplate.send(rabbitConfiguration.getTopicExchangeName(), rabbitConfiguration.getRoutingKey() + ".message", message);
     }
 
     private Message buildMessage(final String message) {

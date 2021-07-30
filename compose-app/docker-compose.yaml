@@ -1,15 +1,27 @@
 services:
   rabbitmq: # https://registry.hub.docker.com/_/rabbitmq
-    image: "rabbitmq:management"
+    image: rabbitmq:management
     ports:
-      - "5672:5672"
-      - "15672:15672" # http://localhost:15672 default login guest:guest
-  producer:
-    image: "message-broker-producer:0.0.1-SNAPSHOT"
-    depends_on:
-      - "rabbitmq"
-  consumer:
-    image: "message-broker-consumer:0.0.1-SNAPSHOT"
-    depends_on:
-      - "rabbitmq"
+      - 5672:5672
+      - 15672:15672 # http://localhost:15672 default login guest:guest
+  db: #login root/example
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
+#  producer:
+#    image: "message-broker-producer:0.0.1-SNAPSHOT"
+#    depends_on:
+#      - "rabbitmq"
+#  consumer:
+#    image: "message-broker-consumer:0.0.1-SNAPSHOT"
+#    depends_on:
+#      - "rabbitmq"
 
