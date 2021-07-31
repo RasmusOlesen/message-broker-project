@@ -1,6 +1,7 @@
 services:
   rabbitmq: # https://registry.hub.docker.com/_/rabbitmq
     image: rabbitmq:management
+    ##image: heidiks/rabbitmq-delayed-message-exchange # x-delay doesnt work...
     ports:
       - 5672:5672
       - 15672:15672 # http://localhost:15672 default login guest:guest

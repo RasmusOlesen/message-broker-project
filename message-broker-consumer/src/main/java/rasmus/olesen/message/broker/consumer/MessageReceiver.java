@@ -42,7 +42,7 @@ public class MessageReceiver {
 
     public void handleMessage(Message message) {
         final String messageId = message.getMessageProperties().getMessageId();
-        log.info("Message[" + messageId +"] received: " + new String(message.getBody()));
+        log.info("Message[" + messageId + "] received: " + new String(message.getBody()));
 
         Date timestamp = message.getMessageProperties().getTimestamp();
         if (timestamp == null) {
@@ -55,10 +55,6 @@ public class MessageReceiver {
             return;
         }
 
-        if(message.getMessageProperties().isRedelivered()) {
-            log.info("Message is redelivered");
-        }
-
         if (isEven(timestamp)) {
             log.info("Saving message with even timestamp: " + timestamp);
             messageRepository.save(MessageEntity.getMessageEntity(message));
@@ -66,8 +62,7 @@ public class MessageReceiver {
         }
 
         log.info("Re-submitting message with uneven timestamp: " + timestamp);
-        message.getMessageProperties().setTimestamp(null);
-        //messageSender.sendMessage(message); // TODO fix re-submit
+        messageSender.resubmitMessage(message);
     }
 
 
